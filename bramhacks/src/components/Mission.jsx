@@ -79,6 +79,18 @@ export default function Mission() {
         'Automated summaries that keep work moving.',
         'Contextual heatmaps and visualizations so teams don’t guess.',
       ]
+    },
+    {
+      title: "Ontario regulations",
+      subtitle:
+        "As we can see, current Ontario regulations are not sufficient to eliminate the risk of glare on the road. Our design would comply with the Highway Traffic Act if implemented as a glare-reduction system integrated into a headlight without altering the original lamp design.",
+      bullets: [
+        'Signal-first: surface the metrics that actually move the needle.',
+        'Low friction: reduce setup and meeting overhead — spend time shipping.',
+        'Shared clarity: make trade-offs visible across stakeholders.'
+      ],
+      imageHref: 'https://www.itv.com/news/2019-06-11/growing-concern-among-drivers-over-headlight-glare',
+      imageSrc: '/importedImage325614_header.jpeg'
     }
   ];
 

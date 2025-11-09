@@ -6,12 +6,11 @@ const facts = [
     title: 'LED blue light & retina risk',
     desc: (
       <>
-        LEDs emit more blue light than conventional lamps. In a rodent model, chronic exposure to{' '}
-        <strong className="font-semibold text-white">~750 lux</strong>{' '}LED light caused light‑induced retinal injury.
+        LEDs emit more blue light than conventional lamps. Reports show that contrasts in glare of <strong className="font-semibold text-white">10:1</strong> should be avoided when performing tasks, and contrasts of <strong className="font-semibold text-white">20:1</strong> creates silhouettes for occupants.
       </>
     ),
-    src: 'NIH / Environmental Health Perspectives',
-    href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3948037/'
+    src: 'VentureWell',
+    href: 'https://sustainabilityworkshop.venturewell.org/buildings/light-distribution-glare.html'
   },
   {
     title: 'Headlight quality has improved',
