@@ -103,21 +103,21 @@ export default function Maps() {
 
   // small UI controls to tweak heatmap
   return (
-    <section id="maps" className="section maps" aria-labelledby="maps-heading">
-      <div className="container">
-        <h2 id="maps-heading" className="section__title">Maps & visualizations</h2>
-        <p className="section__subtitle">Heatmaps and spatial visualizations to highlight activity and signals.</p>
-        <div className="maps__inner">
-          <div className="maps__canvas">
-            <canvas ref={canvasRef} style={{ width: '100%', height: '420px', borderRadius: '12px' }} />
+    <section id="maps" className="py-16" aria-labelledby="maps-heading">
+      <div className="max-w-[1120px] mx-auto px-4">
+        <h2 id="maps-heading" className="text-2xl font-semibold text-white">Maps & visualizations</h2>
+        <p className="text-slate-300 mb-6">Heatmaps and spatial visualizations to highlight activity and signals.</p>
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-[1fr_280px] items-start">
+          <div className="rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,6,23,0.6)] border border-white/5">
+            <canvas ref={canvasRef} style={{ width: '100%', height: '420px', borderRadius: '12px', display: 'block' }} />
           </div>
-          <div className="maps__controls" aria-hidden="false">
-            <label className="maps__label">Density</label>
-            <input type="range" min="20" max="400" value={density} onChange={(e) => setDensity(Number(e.target.value))} />
-            <label className="maps__label">Radius</label>
-            <input type="range" min="8" max="120" value={radius} onChange={(e) => setRadius(Number(e.target.value))} />
-            <p className="maps__help">Use the sliders to quickly tune the visualization. Replace with real data later.</p>
-          </div>
+          <aside className="bg-gradient-to-b from-slate-900 to-slate-800 p-4 rounded-md border border-slate-800 text-slate-300">
+            <label className="block text-sm text-slate-400 mb-2">Density</label>
+            <input className="w-full" type="range" min="20" max="400" value={density} onChange={(e) => setDensity(Number(e.target.value))} />
+            <label className="block text-sm text-slate-400 mt-4 mb-2">Radius</label>
+            <input className="w-full" type="range" min="8" max="120" value={radius} onChange={(e) => setRadius(Number(e.target.value))} />
+            <p className="text-sm text-slate-400 mt-4">Use the sliders to quickly tune the visualization. Replace with real data later.</p>
+          </aside>
         </div>
       </div>
     </section>

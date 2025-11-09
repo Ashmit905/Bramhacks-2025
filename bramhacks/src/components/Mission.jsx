@@ -2,31 +2,57 @@ import React from 'react';
 
 function SplitCard({ title, subtitle, bullets = [], reverse = false, imageHref, imageSrc }) {
   return (
-    <div className={`split-card ${reverse ? 'split-card--rev' : ''}`}>
-      <div className="split-card__content">
-        <h3 className="section__title">{title}</h3>
-        <p className="section__subtitle">{subtitle}</p>
-        {/* bullets intentionally omitted for cleaner layout */}
-      </div>
-      <div className="split-card__media" aria-hidden="true">
-        {imageSrc ? (
-          imageHref ? (
-            <a className="split-media-link" href={imageHref} target="_blank" rel="noopener noreferrer">
-              <img src={imageSrc} alt={title} className="split-media-img" />
-            </a>
-          ) : (
-            <img src={imageSrc} alt={title} className="split-media-img" />
-          )
-        ) : (
-          <div className="visual__card">
-            <div className="visual__header" />
-            <div className="visual__content">
-              <div className="visual__panel" />
-              <div className="visual__panel small" />
-            </div>
+    <div className={`w-full my-8 grid gap-6 md:grid-cols-2 items-stretch`}>
+      {/* render media first when reverse is true so ordering is correct without extra CSS hacks */}
+      {reverse ? (
+        <>
+          <div className="flex items-stretch">
+            {imageSrc ? (
+              imageHref ? (
+                <a className="block w-full h-full overflow-hidden rounded-lg" href={imageHref} target="_blank" rel="noopener noreferrer">
+                  <img src={imageSrc} alt={title} className="w-full h-full object-cover block" />
+                </a>
+              ) : (
+                <div className="w-full h-80 overflow-hidden rounded-lg">
+                  <img src={imageSrc} alt={title} className="w-full h-full object-cover block" />
+                </div>
+              )
+            ) : (
+              <div className="w-full h-80 overflow-hidden rounded-lg">
+                <img src="/IMG_9844.jpg" alt={title} className="w-full h-full object-cover block" loading="lazy" />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+          <div className="starless-card p-6 text-slate-900">
+            <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+            <p className="text-slate-600">{subtitle}</p>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="starless-card p-6 text-slate-900">
+            <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+            <p className="text-slate-600">{subtitle}</p>
+          </div>
+          <div className="flex items-stretch">
+            {imageSrc ? (
+              imageHref ? (
+                <a className="block w-full h-full overflow-hidden rounded-lg" href={imageHref} target="_blank" rel="noopener noreferrer">
+                  <img src={imageSrc} alt={title} className="w-full h-full object-cover block" />
+                </a>
+              ) : (
+                <div className="w-full h-80 overflow-hidden rounded-lg">
+                  <img src={imageSrc} alt={title} className="w-full h-full object-cover block" />
+                </div>
+              )
+            ) : (
+              <div className="w-full h-80 overflow-hidden rounded-lg">
+                <img src="/IMG_9844.jpg" alt={title} className="w-full h-full object-cover block" loading="lazy" />
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -57,8 +83,8 @@ export default function Mission() {
   ];
 
   return (
-    <section id="mission" className="section" aria-labelledby="mission-heading">
-      <div className="container">
+    <section id="mission" className="py-16" aria-labelledby="mission-heading">
+      <div className="max-w-[1120px] mx-auto px-4">
         {items.map((it, idx) => (
           <SplitCard
             key={it.title}

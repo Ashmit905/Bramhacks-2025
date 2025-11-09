@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
-// Headlight-style effect: streaking beams that appear when the user scrolls.
-// The intensity is driven by scroll velocity; beams have soft glow and motion-trail.
-export default function StarField({ maxBeams = 8 }) {
+// Continuous falling beam effect (like rain or starfield)
+// Beams spawn at top and fall down constantly for atmospheric background
+export default function StarField({ maxBeams = 12 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -18,38 +18,22 @@ export default function StarField({ maxBeams = 8 }) {
     // beams pool
     const beams = [];
 
-    function createBeam(x, dir, speedScale = 1) {
-      // dir: +1 means moving down (user scrolled down), -1 up
+    function createBeam(x) {
       const w = 20 + Math.random() * 60; // beam width
       const len = 120 + Math.random() * 280; // visible length
       const intensity = 0.35 + Math.random() * 0.65;
       const hue = 30 + Math.random() * 40; // warm headlight color (yellow-ish)
-      beams.push({ x, w, len, y: dir > 0 ? -len : height + len, dir, speed: (2 + Math.random() * 3) * speedScale, intensity, hue, life: 1.0 });
+      const speed = 2 + Math.random() * 3;
+      beams.push({ x, w, len, y: -len, dir: 1, speed, intensity, hue, life: 1.0 });
     }
 
-    let lastScroll = window.scrollY;
-    let lastTime = performance.now();
-
-    // on scroll, add beams proportional to velocity
-    const onScroll = () => {
-      const now = performance.now();
-      const sy = window.scrollY;
-      const dt = Math.max(8, now - lastTime);
-      const dy = sy - lastScroll;
-      const speed = Math.abs(dy) / dt * 60; // normalized
-
-      // spawn beams based on speed
-      const spawnCount = Math.min(maxBeams, Math.floor(speed / 6));
-      for (let i = 0; i < spawnCount; i++) {
+    // Continuous spawn timer: add beams at regular intervals
+    const spawnInterval = setInterval(() => {
+      if (beams.length < maxBeams) {
         const x = 40 + Math.random() * (canvas.offsetWidth - 80);
-        createBeam(x, dy >= 0 ? 1 : -1, Math.min(3, 0.5 + speed / 20));
+        createBeam(x);
       }
-
-      lastScroll = sy;
-      lastTime = now;
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    }, 400 + Math.random() * 300); // spawn every ~400-700ms
 
     // subtle ambient moving lights to fill scene
     const ambient = Array.from({ length: 10 }, () => ({
@@ -67,9 +51,8 @@ export default function StarField({ maxBeams = 8 }) {
       const W = canvas.offsetWidth;
       const H = canvas.offsetHeight;
 
-      // motion-trail: draw a translucent black rect to slowly fade previous frame
-      ctx.fillStyle = 'rgba(6,8,14,0.18)';
-      ctx.fillRect(0, 0, W, H);
+      // Clear previous frame completely to avoid black trailing artifacts
+      ctx.clearRect(0, 0, W, H);
 
       // ambient faint specks
       ctx.globalCompositeOperation = 'lighter';
@@ -140,11 +123,15 @@ export default function StarField({ maxBeams = 8 }) {
 
     return () => {
       running = false;
-      window.removeEventListener('scroll', onScroll);
+      clearInterval(spawnInterval);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(raf);
     };
   }, [maxBeams]);
 
-  return <div className="starfield" aria-hidden="true"><canvas ref={canvasRef} /></div>;
+  return (
+    <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
+    </div>
+  );
 }

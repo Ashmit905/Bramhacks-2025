@@ -1,17 +1,14 @@
-/* Minimal global resets. All design styles live in styles/landing.css */
+/* Minimal global resets. Tailwind provides the rest. */
 :root {
-  font-family: system-ui, -apple-system, 'Inter', Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html, body { height: 100%; }
-body { margin: 0; }
+body { margin: 0; background: #070b1a; color: #e5e7eb; }
 
-/* Accessible default focus outline for anything not styled by landing.css */
+/* Accessible default focus outline for anything not styled by Tailwind */
 *:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
 
-#hero_desc {
-  font-size: larger;
-  color: white;
-}
+#hero_desc { font-size: larger; }

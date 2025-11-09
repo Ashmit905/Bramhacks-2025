@@ -1,0 +1,124 @@
+/* Starless theme layer: design tokens + component classes on top of Tailwind utilities */
+:root {
+  --starless-bg: #070b1a;
+  --starless-bg-alt: #0d1220;
+  --starless-border: rgba(255,255,255,0.08);
+  --starless-radius: 18px;
+  --starless-card-shadow: 0 8px 40px -10px rgba(2,6,23,0.55);
+  --starless-grad-light: linear-gradient(135deg,#ffffff 0%,#f9fafb 55%,#f1f5f9 100%);
+  /* Dark surfaces */
+  --starless-surface-1: #0a1222;
+  --starless-surface-2: #0d1528;
+  --starless-border-dark: rgba(100,116,139,0.35);
+}
+
+body { background: var(--starless-bg); }
+
+/* Containers */
+.starless-container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Elevated card */
+.starless-card { background: var(--starless-grad-light); border: 1px solid var(--starless-border); border-radius: var(--starless-radius); box-shadow: var(--starless-card-shadow); position: relative; }
+.starless-card--padded { padding: 3.25rem 3rem 3.5rem; }
+@media (max-width: 860px){
+  .starless-card--padded { padding: 2.25rem 1.75rem 2.5rem; }
+}
+
+/* Split card layout */
+.split { display: grid; gap: 2.5rem; align-items: stretch; }
+.split--2 { grid-template-columns: 1fr 1fr; }
+@media (max-width: 980px){ .split--2 { grid-template-columns: 1fr; } }
+
+.split__media img { width:100%; height:100%; object-fit:cover; display:block; }
+.split__media { border-radius: 14px; overflow:hidden; box-shadow: 0 6px 28px -6px rgba(2,6,23,0.45); }
+
+/* Mission specific */
+.mission-row { margin-bottom: 3.75rem; }
+.mission-row:last-of-type { margin-bottom: 0; }
+
+/* Button refinement (no @apply to avoid editor at-rule warnings) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(100,116,139,0.6); /* slate-600/60 */
+  background: #0f172a; /* slate-900 */
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 0.65rem 1.25rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-primary:hover { background: #1f2937; /* slate-800 */ }
+
+/* Accent button variant for CTAs */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(99,102,241,0.6); /* indigo-500/60 */
+  background: #4f46e5; /* indigo-600 */
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 0.65rem 1.25rem;
+  box-shadow: 0 6px 22px -8px rgba(99,102,241,0.6);
+  transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.btn-accent:hover { background:#6366f1; /* indigo-500 */ }
+
+/* Dark card surface to unify facts/maps etc */
+.card-dark {
+  background: linear-gradient(135deg, var(--starless-surface-1), var(--starless-surface-2));
+  border: 1px solid var(--starless-border-dark);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 32px -10px rgba(2,6,23,0.6);
+}
+
+/* Section spacing */
+.section-pad { padding: 4.5rem 0; }
+@media (max-width: 860px){ .section-pad { padding: 3.25rem 0; } }
+
+/* Subtle decorative radial glow behind hero card */
+.hero-glow { position:absolute; inset:0; pointer-events:none; }
+.hero-glow::before { content:""; position:absolute; top:10%; left:50%; width:700px; height:700px; transform:translateX(-50%); background:radial-gradient(circle at 50% 50%, rgba(120,140,255,0.15), transparent 70%); filter:blur(6px); }
+
+/* Typography helpers */
+.heading-xl { font-size: clamp(2.8rem,6.2vw,4.2rem); line-height:1.05; font-weight:600; }
+.heading-md { font-size: clamp(1.9rem,4.4vw,2.6rem); font-weight:600; line-height:1.15; }
+.subtext { color:#475569; font-size:1.05rem; line-height:1.5; }
+
+/* Brand wordmark font & fine tuning */
+.brand-wordmark {
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Accent gradient text for hero highlights */
+.accent-gradient {
+  background: linear-gradient(90deg, #a5b4fc 0%, #22d3ee 50%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Small badge above hero heading */
+.hero-badge {
+  display:inline-flex;
+  align-items:center;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: .8rem;
+  color:#0f172a;
+  background: rgba(226,232,240,0.9);
+  padding: .35rem .6rem;
+  border-radius: .5rem;
+  border: 1px solid rgba(148,163,184,0.4);
+}
+
+/* Utility override for focus (kept) */
+*:focus-visible { outline: 2px solid #6366f1; outline-offset: 3px; }
