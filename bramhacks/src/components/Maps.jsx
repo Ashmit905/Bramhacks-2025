@@ -186,11 +186,7 @@ export default function Maps() {
         ctx.lineTo(originX + W, yT);
         ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(255,140,140,0.8)';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'bottom';
-        ctx.font = '11px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto';
-        ctx.fillText('Glare threshold (1:10)', originX + 8, yT - 4);
+        // Removed textual label to reduce distraction; legend explains line.
       }
 
   // Labels (moved title to HTML for professional layout)
@@ -372,9 +368,16 @@ export default function Maps() {
           </div>
         </div>
         <div className="rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,6,23,0.6)] border border-white/5">
+          <div className="flex items-center gap-4 px-4 pt-3 text-sm text-slate-300">
+            <span className="inline-flex items-center gap-2"><span className="w-4 h-[3px] rounded-sm" style={{background:'rgba(140,190,255,0.95)'}}></span> Smoothed lux</span>
+            <span className="inline-flex items-center gap-2"><span className="w-4 h-[3px] rounded-sm" style={{background:'rgba(255,120,120,0.9)'}}></span> Above glare threshold</span>
+            <span className="inline-flex items-center gap-2"><span className="w-4 h-0 border-t border-dashed" style={{borderColor:'rgba(255,100,100,0.6)'}}></span> Glare threshold (1:10)</span>
+          </div>
           <canvas
             ref={canvasRef}
             style={{ width: '100%', height: '420px', borderRadius: '12px', display: 'block' }}
+            aria-label="Line chart of smoothed lux with glare threshold and exceedances"
+            role="img"
           />
         </div>
       </div>
