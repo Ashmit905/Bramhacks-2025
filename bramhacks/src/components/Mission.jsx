@@ -62,7 +62,7 @@ export default function Mission() {
     {
       title: "Why we're building Starless",
       subtitle:
-        "According to studies, 98% of drivers report being affected by night time glare. Additionaly, 75% of drivers choose to stay off the road do so due to this pressing concern. This contributes to the signifcant increase in light pollutino gloablly, as North American skies get 10% brighter every year. ",
+        "According to studies, 98% of drivers report being affected by night time glare. Additionaly, 75% of drivers choose to stay off the road do so due to this pressing concern. This contributes to the signifcant increase in light pollution gloablly, as North American skies get 10% brighter every year. ",
       bullets: [
         'Signal-first: surface the metrics that actually move the needle.',
         'Low friction: reduce setup and meeting overhead — spend time shipping.',
